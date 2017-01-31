@@ -26,9 +26,10 @@ AppAsset::register($this);
     <body>
         <?php $this->beginBody() ?>
         <?php if (Yii::$app->user->isGuest) : ?>
-            <div class="wrap <?= (Yii::$app->controller->action->id == 'register') ?  'wrapregister' : NULL ?> ">
-                <nav role="navigation" class="navbar navbar-default navbar-fixed-top ">
-                    <div class="nav-container">
+        
+            <div class="wrap <?= (Yii::$app->controller->action->id == 'register') ? 'wrapregister' : NULL ?> ">
+                <nav role="navigation" class="navbar navbar-default navbar-fixed-top  navbar-collapsed  ">
+                    <div class="nav-container ">
                         <ul class="nav navbar-nav navbar-left">
                             <div class="social">
                                 <li>
@@ -37,7 +38,7 @@ AppAsset::register($this);
                                 </li>       
                             </div>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right ">
                             <li><a href="<?php echo Url::to(['site/index']); ?>">Home</a></li>
                             <li><a href="<?php echo Url::to(['stock/shop']) ?>"> Shop </a></li>
                             <li><a href="<?php echo Url::to(['site/contact']) ?>"> Contact</a> </li>
@@ -53,7 +54,7 @@ AppAsset::register($this);
             </div>
         <?php else: ?>
 
-            <div class="wrap <?= (Yii::$app->controller->action->id == 'account') ?  'wrapregister' : NULL ?> ">
+            <div class="wrap <?= (Yii::$app->controller->action->id == 'account') ? 'wrapregister' : NULL ?> ">
                 <nav role="navigation" class="navbar navbar-default navbar-fixed-top navcolor ">
                     <div class="nav-container">
                         <ul class="nav navbar-nav navbar-left">
@@ -68,7 +69,6 @@ AppAsset::register($this);
                             <li><a href="<?php echo Url::toRoute(['site/index'], true); ?>">Home</a></li>
                             <li><a href="<?php echo Url::to(['stock/shop']); ?>"> Shop </a></li>
                             <li><a href="<?php echo Url::to(['stock/cart']); ?>"class="glyphicon glyphicon-shopping-cart" title="My Shopping Cart"></a></li>
-                            <li><a href="<?php echo Url::to(['stock/checkout']); ?>">Checkout</a></li>
                             <li><a href="<?php echo Url::to(['site/contact']); ?>"> Contact </a></li>
                             <li><a href="<?php echo Url::to(['site/about']) ?>"> About Us </a> </li> 
                             <div class="navbar-header navbar-right pull-right">

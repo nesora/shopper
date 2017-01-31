@@ -74,8 +74,9 @@ class SiteController extends Controller {
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect('index');
         }
+
         return $this->render('login', [
                     'model' => $model,
         ]);
@@ -88,8 +89,9 @@ class SiteController extends Controller {
      */
     public function actionLogout() {
         Yii::$app->user->logout();
-        return $this->goHome();
+        return $this->redirect('index');
     }
+
     /**
      * Displays contact page.
      *
@@ -105,6 +107,7 @@ class SiteController extends Controller {
                     'model' => $model,
         ]);
     }
+
     /**
      * Displays about page.
      *
@@ -117,6 +120,7 @@ class SiteController extends Controller {
     public function actionRegister() {
 
         $model = new Backendusers();
+
         $request = Yii::$app->request;
 
         if ($request->isPost) {
@@ -128,6 +132,7 @@ class SiteController extends Controller {
                 'city' => $request->post('city'),
                 'address' => $request->post('address'),
             ]);
+
             $password = $request->post('password');
             if ($password) {
                 $hash = Yii::$app->getSecurity()->generatePasswordHash($password);
@@ -142,6 +147,7 @@ class SiteController extends Controller {
             ]);
         }
     }
+
     /**
      * Updates an existing Backendusers model.
      * If update is successful, the browser will be redirected to the 'index' page.

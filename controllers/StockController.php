@@ -2,30 +2,47 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
-use yii\data\Pagination;
-use app\models\Stock;
 use app\models\Backendusers;
+use app\models\Orders;
+use app\models\Stock;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\data\Pagination;
+use yii\db\Expression;
+use yii\web\Controller;
 
 class StockController extends Controller {
+    
+    public function behaviors()
+{
+    return [
+        [
+            'class' => TimestampBehavior::className(),
+            'createdAtAttribute' => 'timestamp',
+            'value' => new Expression('NOW()'),
+        ],
+    ];
+}
 
-//    public function actionAjax() {
-//
-//        if (Yii::$app->request->isAjax && Yii::$app->request->post()) {
-//
-//            $data = Yii::$app->request->post();
-//
-//            Yii::$app->session->set('postIDs', $data);
-//        }
-//    }
+    public function actionAjax() {
+
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Yii::$app->session->open();
+            $session = Yii::$app->session;
+            if (!isset($session['selectedItems'])) {
+                $session['selectedItems'] = [];
+            }
+
+            $allItemsIDs = $session['selectedItems'];
+            $itemID = Yii::$app->request->post("id");
+            $allItemsIDs[] = $itemID;
+            $session['selectedItems'] = array_unique($allItemsIDs);
+
+            return "OK";
+        }
+    }
 
     public function actionShop() {
-
-//        if (!Yii::$app->session->isActive) {
-        Yii::$app->session->open();
-        $session = Yii::$app->session;
-
 
         $query = Stock::find();
         $pagination = new Pagination([
@@ -37,43 +54,6 @@ class StockController extends Controller {
                 ->limit($pagination->limit)
                 ->all();
 
-        if (Yii::$app->request->post()) {
-
-            $data = Yii::$app->request->post();
-
-            $session = Yii::$app->session;
-
-
-            $session['lastIDs'] = $data;
-
-
-//            $savedIDs = $session['lastIDs'];
-//            $savedIDs[] = $data;
-//            $session['lastIDs'] = $savedIDs;
-//            $savedIDs = $session['savedIDs'];
-//            $savedIDs[] = $data;
-//            $session['savedIDs'] = $savedIDs;
-//            $session->set('postIDs', $data);
-//            $savedIDs = $session['postIDs'];
-//            $session->set('newIDs', $savedIDs);  // set  a session variable 
-//            $session['lastIDs'] = array_merge(Yii::$app->session['newIDs'], $session['postIDs']); //merge the session variable array`s
-//            unset($session['newIDs']);
-//            unset($session['postIDs']);
-
-
-            var_dump('savedIDs var ');
-            var_dump($session['lastIDs']);
-
-
-//            var_dump('start of saved IDs in lastIDs');
-//            var_dump($session['lastIDs']);
-//            var_dump('end of saved IDs in lastIDs');
-            
-        }
-
-//        }
-//        var_dump($session->isActive);
-//        die;
         return $this->render('shop', [
                     'stock' => $stock,
                     'pagination' => $pagination,
@@ -82,18 +62,53 @@ class StockController extends Controller {
 
     public function actionCart() {
 
-        return $this->render('cart');
-    }
+        Yii::$app->session->open();
 
-    public function actionCheckout() {
+        $selectedItems = Yii::$app->session['selectedItems'];
 
-//        $model = new Orders(); // insert information for cart and checkout "tabel"
+        $stockItems = Stock::find()->where(['id' => $selectedItems])->all();
 
+        $data = ['selectedItems' => $stockItems,];
 
         $id = Yii::$app->user->id;
+
         $model = Backendusers::findOne($id);
 
-        return $this->render('checkout', ['model' => $model]);
+        $data['model'] = $model;
+
+        $request = Yii::$app->request;
+
+        if ($request->isPost) {
+
+            $quantity = $request->post('quantity', array());
+
+            foreach ($data['selectedItems'] as $item) {
+
+                foreach ($quantity as $key => $q) {
+
+                    if ($item->id == $key) {
+
+                        $orders = new Orders();
+
+                        $orders->setAttributes([
+                            'firstname' => $model->firstname,
+                            'lastname' => $model->lastname,
+                            'country' => $model->country,
+                            'city' => $model->city,
+                            'address' => $model->address,
+                            'stockname' => $item->stockname,
+                            'quantity' => $q['quantity'],
+                            'price' => $q['subtotal'],
+                            'timestamp' => time(),
+                        ]);
+                        $orders->save();
+                    }
+                }
+            }
+            unset(Yii::$app->session['selectedItems']);
+            return $this->redirect('shop');
+        }
+        return $this->render('cart', $data);
     }
 
 }

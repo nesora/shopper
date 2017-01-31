@@ -1,32 +1,10 @@
 <?php
 $this->title = 'Checkout';
-
-use yii\helpers\Html;
 ?>
 <div class="jumbotron">
     <div class="container text-center">
         <div class="checkout-form">
             <div class="form-fields">
-                <div class="summary">
-                    <h3> Summary </h3>
-                    <table  class="table table-striped" >
-                        <tr>
-                            <th> Product </th> 
-                            <th> Price of product </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th> name of product </th> 
-                            <th> 3$ </th>
-                            <th> </th>
-                        </tr>
-                        <tr>
-                            <th> Total Cost : </th> 
-                            <th> 43534 $ </th>
-                            <th></th>
-                        </tr>
-                    </table>
-                </div>
                 <div class="payment">
                     <h2>Payment Information</h2>
                     <form>

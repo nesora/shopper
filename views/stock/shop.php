@@ -6,7 +6,7 @@ use yii\widgets\LinkPager;
 ?>
 <?php if (Yii::$app->user->isGuest) : ?>
     <div class="alert alert-danger shopalert" role="alert">
-        <strong> If u are Guest , please </strong> <a href="<?php echo Url::to(['site/login']) ?>" class="alert-link"> Register / Login to the shop </a> before u start shopping !
+        <strong> If u are Guest , please </strong> <a href="<?php echo Url::to(['site/login']) ?>" class="alert-link"> Register / Login  </a>  <b> to the shop before u start shopping </b>
     </div>
     <div class="row">
         <div class="container">
@@ -17,7 +17,7 @@ use yii\widgets\LinkPager;
                     <?php foreach ($stock as $stocklist): ?>
                         <div class="col-sm-4 col-lg-4"> 
                             <div class="prod_box">
-                                <div class="product_title" value="<?php $stocklist->name ?>" >  <?php echo $stocklist->name ?> </div>
+                                <div class="product_title" value="<?php $stocklist->stockname ?>" >  <?php echo $stocklist->stockname ?> </div>
                                 <div class="product_img"><img src="https://s-media-cache-ak0.pinimg.com/736x/17/28/1a/17281adc745d17db1bf299679c4f0b8b.jpg" class="img-responsive"  ></div>
                                 <div class="prod_price" value="<?php $stocklist->price ?>"> Buy now only for  <?php echo $stocklist->price ?>  $ </div>
                                 <div class="prod_buy">
@@ -43,7 +43,7 @@ use yii\widgets\LinkPager;
                     <?php foreach ($stock as $stocklist): ?>
                         <div class="col-sm-4"> 
                             <div class="prod_box">
-                                <div class="product_title"  value="<?php $stocklist->name ?>" >  <?php echo $stocklist->name ?> </div>
+                                <div class="product_title"  value="<?php $stocklist->stockname ?>" >  <?php echo $stocklist->stockname ?> </div>
                                 <div class="product_img"><img src="https://s-media-cache-ak0.pinimg.com/736x/17/28/1a/17281adc745d17db1bf299679c4f0b8b.jpg" class="img-responsive"  ></div>
                                 <div class="prod_price"  value="<?php $stocklist->price ?>">   <?php echo $stocklist->price ?>  $ </div>
                                 <div class="prod_buy">
@@ -61,18 +61,19 @@ use yii\widgets\LinkPager;
     </footer>
     <script type="text/javascript">
         $(document).ready(function () {
-            var IDs = [];
+
             $('.custombtn').click(function () {
                 var id = $(this).attr("value");
-                IDs.push(id);
+                console.log(id);
+
                 $.ajax({
                     type: 'POST',
-                    url: '<?php echo Url::to(['stock/shop']); ?>',
-                    data: {IDs},
+                    url: '<?php echo Url::to(['stock/ajax']); ?>',
+                    data: {id: id},
                     dataType: 'json'
                 });
-                console.log(IDs);
             });
+
         });
     </script>
 <?php endif; ?>

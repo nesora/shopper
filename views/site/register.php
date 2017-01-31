@@ -13,8 +13,7 @@ $this->title = 'Register';
         <input type="text" name="address"placeholder="Write your Address" value="<?= $model->address ?>"required="">
         <input type="text" name="city"  placeholder="Write your City" value="<?= $model->city ?>" required="">
         <input type="text" name="country" placeholder="Write your Country" value="<?= $model->country ?>"required="">
-
-            <div class="submit registration-button">
+        <div class="submit registration-button">
             <button type="submit" class="btn btn-success"> Create Account </button>
             <input type="hidden" value="" name="_csrf">
         </div>

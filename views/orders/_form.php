@@ -12,9 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'backenduserid')->textInput() ?>
+    <?= $form->field($model, 'firstname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'stockid')->textInput() ?>
+    <?= $form->field($model, 'lastname')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'stockname')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'quantity')->textInput() ?>
+
+    <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'timestamp')->textInput(['maxlength' => true]) ?>
 
