@@ -3,14 +3,14 @@ $this->title = 'Welcome';
 ?>
 <div class="jumbotron">
     <ul id="exampleSlider" style="list-style-type:none">
-        <li><img class="one" src="../../web/css/images/car1.jpg" alt=""/></li>
-        <li><img class="one" src="../../web/css/images/car2.jpg" alt=""/></li>
-        <li><img class="one" src="../../web/css/images/car3.jpg" alt=""/></li>
-        <li><img class="one" src="../../web/css/images/car4.jpg" alt=""/></li>
-        <li><img class="one" src="../../web/css/images/car5.jpg" alt=""/></li>
-        <li><img class="one" src="../../web/css/images/car6.jpg" alt=""/></li>
-        <li><img class="one" src="../../web/css/images/car7.jpg" alt=""/></li>
-        <li><img class="one" src="../../web/css/images/car8.jpg" alt=""/></li>
+        <li><img class="one" src="../../web/css/images/car1.jpg" /></li>
+        <li><img class="one" src="../../web/css/images/car2.jpg" /></li>
+        <li><img class="one" src="../../web/css/images/car3.jpg" /></li>
+        <li><img class="one" src="../../web/css/images/car4.jpg" /></li>
+        <li><img class="one" src="../../web/css/images/car5.jpg" /></li>
+        <li><img class="one" src="../../web/css/images/car6.jpg" /></li>
+        <li><img class="one" src="../../web/css/images/car7.jpg" /></li>
+        <li><img class="one" src="../../web/css/images/car8.jpg" /></li>
     </ul>
 </div>  
 <script type="text/javascript">

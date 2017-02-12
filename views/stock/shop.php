@@ -61,11 +61,9 @@ use yii\widgets\LinkPager;
     </footer>
     <script type="text/javascript">
         $(document).ready(function () {
-
             $('.custombtn').click(function () {
                 var id = $(this).attr("value");
                 console.log(id);
-
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo Url::to(['stock/ajax']); ?>',
@@ -73,7 +71,6 @@ use yii\widgets\LinkPager;
                     dataType: 'json'
                 });
             });
-
         });
     </script>
 <?php endif; ?>

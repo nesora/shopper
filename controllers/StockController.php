@@ -12,17 +12,16 @@ use yii\db\Expression;
 use yii\web\Controller;
 
 class StockController extends Controller {
-    
-    public function behaviors()
-{
-    return [
-        [
-            'class' => TimestampBehavior::className(),
-            'createdAtAttribute' => 'timestamp',
-            'value' => new Expression('NOW()'),
-        ],
-    ];
-}
+
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'timestamp',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
 
     public function actionAjax() {
 
@@ -32,13 +31,10 @@ class StockController extends Controller {
             if (!isset($session['selectedItems'])) {
                 $session['selectedItems'] = [];
             }
-
             $allItemsIDs = $session['selectedItems'];
             $itemID = Yii::$app->request->post("id");
             $allItemsIDs[] = $itemID;
             $session['selectedItems'] = array_unique($allItemsIDs);
-
-            return "OK";
         }
     }
 

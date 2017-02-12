@@ -95,7 +95,6 @@ $this->title = 'Shopping Cart';
             subtotal = subtotal.toFixed(2);
             //Display subtotal in HTML element
             $('.productTotal', this).html(subtotal);
-
             $('.payment').append('<input type="hidden" name="quantity[' + id + '][subtotal]" value="' + subtotal + '">');
             $('.payment').append('<input type="hidden" name="quantity[' + id + '][quantity]" value="' + quantity + '">');
         });
